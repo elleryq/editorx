@@ -73,8 +73,16 @@ Help Menu
 
 
 def parse(cmdline):
-    # TODO: need implement.
-    return cmdline[0].upper()
+    if cmdline:
+        cmd = cmdline[0]
+        commaPos = cmdline.find(',')
+        try:
+            p1 = int(cmdline[commaPos+1])
+        except:
+            p1 = 0
+        return (cmd, p1)
+    else:
+        return ('E', 0)
 
 
 def main(arg):
@@ -89,9 +97,11 @@ def main(arg):
     while True:
         print(">", end='')
         cmdline = raw_input()
-        cmd = parse(cmdline)
+        cmd, p1 = parse(cmdline)
         if cmd == 'E':
             break
+        else:
+            tf.p1 = p1
 
     tf.save()
 
