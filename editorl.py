@@ -45,12 +45,12 @@ class TargetFile(object):
         pass
 
     def save(self):
-        dotPos = self.filename.rfind(os.path.extsep)
+        dot = os.path.extsep
+        dotPos = self.filename.rfind(dot)
         if dotPos == -1:
-            backupFilename = os.path.extsep.join([self.filename, 'bak'])
+            backupFilename = dot.join([self.filename, 'bak'])
         else:
-            backupFilename = os.path.extsep.join(
-                [self.filename[:dotPos], 'bak'])
+            backupFilename = dot.join([self.filename[:dotPos], 'bak'])
         if os.path.exists(backupFilename):
             os.remove(backupFilename)
         shutil.copy(self.filename, backupFilename)
