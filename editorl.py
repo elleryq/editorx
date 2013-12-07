@@ -89,6 +89,9 @@ def main(arg):
     showHelp()
     print("\nEditor file: ", end='')
     filename = raw_input()
+    if not filename:
+        print("filename is empty.")
+        sys.exit(-1)
     if not os.path.exists(filename):
         print("  New file")
         fp = open(filename, "wt")
