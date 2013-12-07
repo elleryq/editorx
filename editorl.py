@@ -59,8 +59,17 @@ class TargetFile(object):
 
 
 def showHelp():
-    # TODO: need implement
-    pass
+    print("""
+Help Menu
+<CommandLine>::=<Prompt><Command>[,<Parameter>]
+<Prompt>::=]
+<Command>::=A|B|C|D|E|H|I|L|N|O|S|T
+           |Abort| Bottom| Change
+           |Delete| End| Head
+           |Insert| Last| Next
+           |OnHelp| Show| Top
+<Parameter>::=-32767..32767
+    """)
 
 
 def parse(cmdline):
