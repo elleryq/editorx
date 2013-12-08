@@ -29,9 +29,9 @@ class TargetFile(object):
                 self.showLastPage()
 
     def checkEmpty(fn):
-        def f(self):
+        def f(self, *args, **kwargs):
             if len(self.lines):
-                fn(self)
+                return fn(self, *args, **kwargs)
         return f
 
     @checkEmpty
@@ -69,6 +69,10 @@ class TargetFile(object):
     def moveLast(self):
         self.currentPosition = len(self.lines)-1
 
+    @checkEmpty
+    def changeCurrentNode(self, newLine):
+        self.lines[self.currentPosition] = newLine
+
 
 def showHelp():
     print("""
@@ -89,13 +93,20 @@ def abortEdit(tf):
 
 
 def bottomNode(tf):
-    pass
+    tf.moveLast()
+
+
+def changeNode(tf):
+    tf.showCurrentNode()
+    newLine = raw_input()
+    tf.changeCurrentNode(newLine)
 
 
 def initializeCommands():
     cmds = {}
     cmds['A'] = abortEdit
     cmds['B'] = bottomNode
+    cmds['C'] = changeNode
     return cmds
 
 
