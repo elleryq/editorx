@@ -14,7 +14,7 @@ class TargetFile(object):
 
     def loadFile(self):
         with open(self.filename, "rt") as fp:
-            self.lines = fp.readlines()
+            self.lines = [line.rstrip() for line in fp.readlines()]
         self.currentPosition = 0
         self.p1 = 10  # TODO: need a clear name.
         self.showCurrentNode()
@@ -64,7 +64,7 @@ class TargetFile(object):
             os.remove(backupFilename)
         shutil.copy(self.filename, backupFilename)
         with open(self.filename, "wt") as fp:
-            fp.writelines(self.lines)
+            fp.writelines([''.join([line, os.linesep]) for line in self.lines])
 
     def moveLast(self):
         self.currentPosition = len(self.lines)-1
