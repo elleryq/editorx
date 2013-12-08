@@ -72,9 +72,19 @@ Help Menu
     """)
 
 
+def abortEdit(tf):
+    sys.exit(1)
+
+
+def initializeCommands():
+    cmds = {}
+    cmds['A'] = abortEdit
+    return cmds
+
+
 def parse(cmdline):
     if cmdline:
-        cmd = cmdline[0]
+        cmd = cmdline[0].upper()
         commaPos = cmdline.find(',')
         try:
             p1 = int(cmdline[commaPos+1])
@@ -88,6 +98,7 @@ def parse(cmdline):
 def main(arg):
     showHelp()
     print("\nEditor file: ", end='')
+    cmds = initializeCommands()
     filename = raw_input()
     if not filename:
         print("filename is empty.")
@@ -104,7 +115,11 @@ def main(arg):
         if cmd == 'E':
             break
         else:
-            tf.p1 = p1
+            if cmd in cmds:
+                tf.p1 = p1
+                cmds[cmd](tf)
+            else:
+                print("Wrong command.")
 
     tf.save()
 
