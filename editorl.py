@@ -66,6 +66,9 @@ class TargetFile(object):
         with open(self.filename, "wt") as fp:
             fp.writelines(self.lines)
 
+    def moveLast(self):
+        self.currentPosition = len(self.lines)-1
+
 
 def showHelp():
     print("""
@@ -85,9 +88,14 @@ def abortEdit(tf):
     sys.exit(1)
 
 
+def bottomNode(tf):
+    pass
+
+
 def initializeCommands():
     cmds = {}
     cmds['A'] = abortEdit
+    cmds['B'] = bottomNode
     return cmds
 
 
