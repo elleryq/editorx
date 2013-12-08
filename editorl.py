@@ -28,9 +28,17 @@ class TargetFile(object):
             else:
                 self.showLastPage()
 
+    def checkEmpty(fn):
+        def f(self):
+            if len(self.lines):
+                fn(self)
+        return f
+
+    @checkEmpty
     def showCurrentNode(self):
         print(self.lines[self.currentPosition])
 
+    @checkEmpty
     def showNextPage(self):
         print("showNextPage")
         p = self.currentPosition
@@ -41,6 +49,7 @@ class TargetFile(object):
             p = p + 1
             n = n + 1
 
+    @checkEmpty
     def showLastPage(self):
         pass
 
